@@ -14,6 +14,15 @@ int main() {
     }
 
     printf("Sum is: %d\n", sum);
+
+    int start, end;
+
+    printf("Enter start and end number");
+    scanf("%d %d", &start, &end);
+
+    for (int i = start; i <= end; i++) {
+        printf("%d\n", i);
+    }
     
     return 0;
 }
