@@ -1,36 +1,72 @@
-#include<stdio.h>
+#include <stdio.h>
+#include <string.h>
 
-int main() {
-    int score; 
-    char option[4]; 
-    char array[4]={'B','D', 'C', 'A'};
+struct Question {
+    char title[200];
+    char options[4][50];
+    char answer[50];
+};
 
-    printf("Answer these 4 multiple choice questions: Each question is worth 1 marks. Make sure to answer with a capital letter");
-    
-    printf("\n1. What is the national bird of The United States of America?\n");
-    printf("A. Vulture\n B. Bald Eagle\n C. Toucan\n D.Kiwi\n");
-    scanf(" %c", &option[0]);
+typedef struct Question Question;
 
-    printf("\n2. What is the capital of Egypt?\n"); 
-    printf("A. Nairobi \n B. Kampala\n C. Lagos\n D Cairo\n");
-    scanf(" %c", &option[1]);
-     
-    printf("\n3. How many colours are there in the French flag?\n");
-    printf("A. 1 \n B. 2\n C. 3\n D.4\n ");
-    scanf(" %c", &option[2]);
+Question create_question(const char* title, const char* a, const char* b, const char* c, const char* d, const char* answer){
+    Question question;
+    strcpy(question.title, title);
+    strcpy(question.options[0], a);
+    strcpy(question.options[1], b);
+    strcpy(question.options[2], c);
+    strcpy(question.options[3], d);
+    strcpy(question.answer, answer);
+    return question;
+}
 
-    printf("\n4. In which continent is the Sahara Desert located?\n ");
-    printf("A. Africa \n B. Asia \n C. North America \n D.South America\n");
-    scanf(" %c", &option[3]);
-
-    for (int i = 0; i < 4; i++) {
-        if (array[i] == option[i]) {
-            printf("Number %d is correct, answer is %c\n", i+1, array[i]);
-        }
-        else {
-            printf("Number %d is incorrect, correct answer is %c\n", i+1, array[i]);
-        }
+void print_question(Question question) {
+    printf("%s\n", question.title);
+    printf("Options:\n");
+    for (int i = 0; i < 4; i++){
+        printf("\t%d. %s\n", i+1, question.options[i]);
+        
     }
+
+}
+int main() {
+    int score = 0; 
+    Question questions[4];
+
+    printf("Answer these 4 multiple choice questions: Each question is worth 1 marks. Make sure to answer with a capital letter\n\n");
+
+    questions[0] = create_question(
+        "What is the national bird of The United States of America",
+        "Vulture", "Bald Eagle", "Toucan", "Kiwi", 
+        "Bald Eagle"
+    );
+
+    questions[1] = create_question(
+        "What is the capital of Egypt",
+        "Nairobi", "Kampala", "Lagos", "Cairo", 
+        "Cairo"
+    );
+
+    questions[2] = create_question(
+        "How many colours are there in the French flag",
+        "1", "2", "3", "4", 
+        "3"
+    );
     
+     questions[3] = create_question(
+        "In which continent is the Sahara Desert located",
+        "Africa", "Asia", "North America", "South America", 
+        "Africa"
+    );
+    int choice;
+    for (int i = 0; i < 4; i++) {
+        printf("\n");
+        print_question(questions[i]);
+        printf("\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+        printf("\n");
+    }
+
     return 0;
 }
