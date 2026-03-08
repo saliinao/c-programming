@@ -1,7 +1,7 @@
 //Some sample C program.
 #include <stdio.h>
 
-int main (){
+int main() {
     printf("hello world");
 
     // Some problems related to formatted strings.
@@ -14,4 +14,6 @@ int main (){
 
     printf("Tab character: \\t");
     printf("\n");
+
+    return 0;
 }
